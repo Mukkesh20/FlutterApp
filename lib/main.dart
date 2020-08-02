@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import './questions.dart';
+import './answer.dart';
 
 void main(){
  runApp(MyFirstApp());
@@ -13,13 +15,13 @@ class MyFirstApp extends StatefulWidget{
 }
 
 class MyFirstAppState extends State<MyFirstApp>{
-  var questionIndex = 0;
+  var _questionIndex = 0;
 
-  onClickFunc(){
+  void _answerQuestion(){
     setState(() {
-      questionIndex =questionIndex +1;
+      _questionIndex = _questionIndex +1;
     });
-    print(questionIndex);
+    print(_questionIndex);
   }
 
   Widget build(BuildContext context){
@@ -33,19 +35,11 @@ class MyFirstAppState extends State<MyFirstApp>{
         AppBar(title: Text('My First Cluster App'),),
        body: Column(
          children: [
-           Text(questions[questionIndex]),
-           RaisedButton(
-             child: Text('Green'),
-             onPressed: onClickFunc,
-             ),
-           RaisedButton(
-             child: Text('Blue'),
-             onPressed: onClickFunc,
-             ),
-           RaisedButton(
-             child: Text('Black'),
-             onPressed: onClickFunc,
-             )
+            Questions(questions[_questionIndex]
+           ),
+           Answer(_answerQuestion),
+           Answer(_answerQuestion),
+           Answer(_answerQuestion),
          ],
        ),
         ),
