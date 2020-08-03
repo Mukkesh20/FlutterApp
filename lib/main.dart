@@ -22,26 +22,39 @@ class MyFirstAppState extends State<MyFirstApp>{
       _questionIndex = _questionIndex +1;
     });
     print(_questionIndex);
+    
   }
 
   Widget build(BuildContext context){
-    var questions = [
-      "Your Favourite color?",
-      "Your Favourite fruit?",
-      "Your Favourite Cricket Player?"
+    final questions = [
+      {
+        "questionText" :  "Your Favourite color?",
+        "answers" : ["Blue", "Green", "Black", "Red"]
+      },
+      {
+        "questionText" :  "Your Favourite Fruit?",
+        "answers" : ["Banana", "Apple", "Mango", "Lichi"]
+      },
+      {
+        "questionText" :  "Your Favourite Cricket Player?",
+        "answers" : ["MS Dhoni", "Sachin", "Dravid", "Ganguly"]
+      },
+      
     ];
     return MaterialApp(home: Scaffold(
       appBar: 
         AppBar(title: Text('My First Cluster App'),),
-       body: Column(
+       body: _questionIndex < questions.length ? Column(
          children: [
-            Questions(questions[_questionIndex]
+            Questions(questions[_questionIndex]['questionText']
            ),
-           Answer(_answerQuestion),
-           Answer(_answerQuestion),
-           Answer(_answerQuestion),
+           ...(questions[_questionIndex]['answers'] as List<String>).map((answer) {
+             return Answer(_answerQuestion, answer);
+           }).toList(),
          ],
-       ),
+       ) : Center(child: 
+            Text('Thank You!!'),
+          ),
         ),
     );
   }
